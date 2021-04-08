@@ -1,0 +1,14 @@
+[tool.poetry]
+name = "pydantable"
+version = "0.1.0"
+description = ""
+authors = ["Tom Bulled <26026015+tombulled@users.noreply.github.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+pydantic = "^1.8.1"
+tinydb = "^4.4.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
