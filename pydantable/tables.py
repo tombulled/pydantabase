@@ -21,6 +21,13 @@ class ModelTable(tinydb.table.Table):
     def insert(self, model):
         return super().insert(model.dict())
 
+    def insert_multiple(self, models):
+        return \
+        [
+            self.insert(model)
+            for model in models
+        ]
+
 class MappedModelTable(ModelTable):
     document_query: tinydb.Query
 
