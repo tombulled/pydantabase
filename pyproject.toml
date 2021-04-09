@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "pydantable"
+name = "pydantabase"
 version = "0.1.0"
 description = ""
 authors = ["Tom Bulled <26026015+tombulled@users.noreply.github.com>"]
