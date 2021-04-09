@@ -1,13 +1,8 @@
 import pydantic
 
-class BaseModel(pydantic.BaseModel):
-    class Config:
-        allow_mutation = False
+from . import models
 
-    def __getitem__(self, key):
-        return getattr(self, key)
-
-class Document(BaseModel):
+class Document(models.BaseModel):
     _doc_id: int = pydantic.PrivateAttr()
 
     def __init__(self, value: dict, doc_id: int):
