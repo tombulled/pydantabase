@@ -3,64 +3,31 @@ Pydantic integration for TinyDB
 
 ## Example:
 ```python
-import pydantic
 import pydantabase
 import tinydb.storages
-import enum
-import typing
 
-class BaseModel(pydantabase.ModelMixin, pydantic.BaseModel):
-    class Config:
-        allow_mutation: bool = False
-
-class ParentType(enum.Enum):
-    COOL   = enum.auto()
-    BORING = enum.auto()
-
-class Child(BaseModel):
+class Person(pydantabase.BaseModel):
     name: str
-    age:  int
-
-class Parent(BaseModel):
-    type:  ParentType
-    name:  str
-    age:   int
-    child: Child
+    age: int
 
 class Database(pydantabase.Database):
     default_storage_class = tinydb.storages.MemoryStorage
-
-    def __getitem__(self, type: enum.Enum) -> typing.Optional[pydantic.BaseModel]:
-        return self.get(pydantabase.Query().type == type)
         
-db = Database(Parent)
+db = Database(Person)
 
-p = Parent \
-(
-    type  = ParentType.COOL,
-    name  = 'Parent',
-    age   = 53,
-    child = Child \
-    (
-        name = 'Child',
-        age  = 8,
+db.insert_multiple([
+    Person(
+        name = 'Paul',
+        age = 53,
     ),
-)
-p2 = Parent \
-(
-    type  = ParentType.BORING,
-    name  = 'Parent2',
-    age   = 54,
-    child = Child \
-    (
-        name = 'Child2',
-        age  = 9,
+    Person(
+        name = 'Rebecca',
+        age = 47,
     ),
-)
+])
+```
 
-db.insert(p)
-db.insert(p2)
-
-d  = db.get(tinydb.Query().name       == 'Parent')
-d2 = db.get(tinydb.Query().child.name == 'Child')
+```python
+>>> db.get(tinydb.Query().name == 'Paul')
+Person(name='Paul', age=53)
 ```
