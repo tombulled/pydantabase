@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "pydantabase"
 version = "0.1.0"
-description = ""
+description = "Pydantic integration for TinyDB"
 authors = ["Tom Bulled <26026015+tombulled@users.noreply.github.com>"]
 
 [tool.poetry.dependencies]
